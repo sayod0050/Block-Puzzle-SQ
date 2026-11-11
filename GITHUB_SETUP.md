@@ -1,57 +1,45 @@
-# 🚀 Quick GitHub Setup & Automated Release Guide
+# 📱 How to Download the Standalone APK Directly (No ZIP!)
 
-Your project is fully initialized with **Git** and configured with a complete **GitHub Actions CI/CD & Automated Release Pipeline** (`.github/workflows/build_and_release.yml`).
+### Why did GitHub download a `.zip` before?
+In GitHub Actions, the **"Artifacts"** section at the bottom of a workflow run automatically compresses files into a `.zip` archive (e.g. `Block-Puzzle-SQ-APK.zip`). That is normal GitHub behavior for build artifacts.
 
 ---
 
-## 1. Push Code to Your GitHub Repository
+## 🌟 The Solution: Direct APK Download via GitHub Releases
 
-On your machine or terminal, run:
+With our updated workflow, every time you push to `main` or push a tag, GitHub Actions **automatically publishes a GitHub Release**!
+
+In **GitHub Releases**, files are NOT zipped — they are raw `.apk` files!
+
+### How to get the direct `.apk` on your phone:
+1. Open your repository on GitHub: `https://github.com/YOUR_USERNAME/YOUR_REPO/releases`
+2. Under the latest release (**"BLOCK PUZZLE — S&S GAMES"**), look under **Assets**.
+3. Tap **`BlockPuzzle_S&S.apk`**.
+4. Your Android browser will download the `.apk` directly (as an `.apk`, **not** a `.zip`!).
+5. Tap the downloaded `.apk` and click **Install**.
+
+---
+
+## 🚀 How to Push to GitHub
 
 ```bash
-# 1. Add your GitHub remote repository (replace with your repo URL)
-git remote add origin https://github.com/YOUR_USERNAME/block-puzzle-ss-games.git
+# 1. Add your GitHub remote repository (if not already added)
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
 
 # 2. Push to GitHub
 git push -u origin main
 ```
 
----
-
-## 2. Automated GitHub Actions Workflows
-
-As soon as you push to `main`:
-1. **GitHub Actions** automatically runs `.github/workflows/build_and_release.yml`.
-2. It sets up Java 17 and the Android SDK.
-3. It executes the automated unit test suite (`:app:testDebugUnitTest`).
-4. It builds:
-   - **`BlockPuzzle_SS_Games_v1.0.0_release.apk`** (Release APK)
-   - **`BlockPuzzle_SS_Games_v1.0.0_debug.apk`** (Debug APK)
-   - **`BlockPuzzle_SS_Games_v1.0.0_release.aab`** (Google Play Store App Bundle)
-5. It uploads the binaries under the **Artifacts** section of the GitHub Actions run for instant download.
+As soon as you run `git push`, GitHub Actions will:
+1. Automatically run all unit tests.
+2. Build `BlockPuzzle_S&S.apk` (and `BlockPuzzle_S&S_Release.apk`).
+3. Automatically create/update the GitHub Release at `https://github.com/YOUR_USERNAME/YOUR_REPO/releases` with the direct `.apk` attached.
+4. You simply open the link, tap `BlockPuzzle_S&S.apk`, and install it immediately!
 
 ---
 
-## 3. Create an Automated GitHub Release with APKs Attached
-
-Whenever you want to publish a new official version (e.g. `v1.0.0`), simply push a git tag:
-
-```bash
-# Tag the current release
-git tag v1.0.0
-
-# Push the tag to GitHub
-git push origin v1.0.0
-```
-
-GitHub Actions will automatically:
-- Trigger the **Release** job.
-- Package the APKs and AAB.
-- Publish a **GitHub Release** with download links to `BlockPuzzle_SS_Games_v1.0.0_release.apk`, `BlockPuzzle_SS_Games_v1.0.0_debug.apk`, and `BlockPuzzle_SS_Games_v1.0.0_release.aab`.
-- Generate release notes featuring **S&S GAMES** and creators **Sadulloev Sayod & Subhon Qodirov**.
-
-### Manual Release (One-Click)
-You can also trigger a release directly from the GitHub UI:
-1. Go to **Actions** tab in your GitHub repository.
-2. Select **"Build and Release Block Puzzle S&S Games"**.
-3. Click **"Run workflow"**, choose the version tag (e.g. `v1.0.0`), and check **Create GitHub Release**.
+## 👥 Official Credits
+**BLOCK PUZZLE**  
+*Created by Sadulloev Sayod and Subhon Qodirov.*  
+*Made with passion by S&S GAMES.*  
+*Slogan: THINK SMART. PLACE BOLD.*
