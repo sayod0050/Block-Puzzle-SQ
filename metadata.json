@@ -1,0 +1,6 @@
+{
+  "name": "Block Puzzle",
+  "description": "Block Puzzle by S&S Games. Created by Sadulloev Sayod and Qodirov Subhon. Think smart. Place bold.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
