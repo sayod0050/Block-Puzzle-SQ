@@ -34,7 +34,7 @@ import com.example.game.localization.GameStrings
 import com.example.game.ui.theme.GameThemePalette
 
 /**
- * Premium S&S GAMES branding monogram and title header
+ * Premium Subhon & Sayod Games branding monogram and title header
  */
 @Composable
 fun SQBrandHeader(
@@ -58,7 +58,7 @@ fun SQBrandHeader(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // S&S Monogram Badge
+        // Subhon & Sayod Monogram Badge
         Box(
             modifier = Modifier
                 .scale(pulseScale)
@@ -107,21 +107,21 @@ fun SQBrandHeader(
                     fontWeight = FontWeight.Black,
                     fontFamily = FontFamily.SansSerif
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(10.dp))
                 Column {
                     Text(
-                        text = "GAMES",
+                        text = "SUBHON & SAYOD",
                         color = theme.textPrimary,
-                        fontSize = if (isCompact) 10.sp else 13.sp,
+                        fontSize = if (isCompact) 9.sp else 11.sp,
                         fontWeight = FontWeight.Bold,
-                        letterSpacing = 3.sp
+                        letterSpacing = 1.sp
                     )
                     Text(
-                        text = "STUDIO",
-                        color = theme.textSecondary,
+                        text = "GAMES STUDIO",
+                        color = theme.secondaryAccent,
                         fontSize = if (isCompact) 8.sp else 9.sp,
-                        fontWeight = FontWeight.Medium,
-                        letterSpacing = 1.5.sp
+                        fontWeight = FontWeight.SemiBold,
+                        letterSpacing = 1.sp
                     )
                 }
             }

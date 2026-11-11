@@ -132,7 +132,7 @@ fun AboutScreen(
                         Spacer(modifier = Modifier.height(14.dp))
 
                         Text(
-                            text = "1. SADULLOEV SAYOD\n2. QODIROV SUBHON",
+                            text = "1. SUBHON QODIROV\n2. SADULLOEV SAYOD",
                             color = theme.textPrimary,
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Black,

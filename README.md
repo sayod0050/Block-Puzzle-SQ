@@ -1,18 +1,18 @@
-# BLOCK PUZZLE — S&S GAMES
+# BLOCK PUZZLE — SUBHON & SAYOD GAMES
 ## Edition: Premium 2026 | Android | Production Build
 
 > **"THINK SMART. PLACE BOLD."**  
-> *Created by Sadulloev Sayod and Subhon Qodirov. Made with passion by S&S GAMES.*
+> *Created by Subhon Qodirov and Sadulloev Sayod. Made with passion by Subhon & Sayod Games.*
 
 ---
 
 ## 🌟 Official Game Identity
 - **Game Title:** BLOCK PUZZLE
-- **Studio & Developer:** S&S GAMES
+- **Studio & Developer:** Subhon & Sayod Games (S&S)
 - **Official Creators:**
-  1. **Sadulloev Sayod**
-  2. **Subhon Qodirov**
-- **Official Credit:** *Created by Sadulloev Sayod and Subhon Qodirov. Made with passion by S&S GAMES.*
+  1. **Subhon Qodirov**
+  2. **Sadulloev Sayod**
+- **Official Credit:** *Created by Subhon Qodirov and Sadulloev Sayod. Made with passion by Subhon & Sayod Games.*
 - **Official Slogan:** *THINK SMART. PLACE BOLD.*
 
 ---

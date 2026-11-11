@@ -2,6 +2,7 @@ package com.example.game.localization
 
 /**
  * Tri-lingual localization dictionary for English, Russian, and Tajik
+ * Subhon & Sayod Games
  */
 object GameStrings {
 
@@ -19,9 +20,9 @@ object GameStrings {
             "TG" to "БЛОК ПАЗЛ"
         ),
         "app_subtitle" to mapOf(
-            "EN" to "S&S GAMES",
-            "RU" to "S&S GAMES",
-            "TG" to "S&S GAMES"
+            "EN" to "SUBHON & SAYOD",
+            "RU" to "СУБХОН И САЁД",
+            "TG" to "СУБҲОН ВА САЁД"
         ),
         "slogan" to mapOf(
             "EN" to "THINK SMART. PLACE BOLD.",
@@ -29,14 +30,14 @@ object GameStrings {
             "TG" to "ФИКР КУН. ҶАРОАТМАНДОНА ГУЗОР."
         ),
         "created_by" to mapOf(
-            "EN" to "Created by Sadulloev Sayod & Subhon Qodirov",
-            "RU" to "Создатели: Садуллоев Саёд и Субхон Кодиров",
-            "TG" to "Муаллифон: Саъдуллоев Саёд ва Субҳон Қодиров"
+            "EN" to "Created by Subhon Qodirov & Sadulloev Sayod",
+            "RU" to "Создатели: Субхон Кодиров и Садуллоев Саёд",
+            "TG" to "Муаллифон: Субҳон Қодиров ва Саъдуллоев Саёд"
         ),
         "made_with_passion" to mapOf(
-            "EN" to "Made with passion by S&S GAMES",
-            "RU" to "Сделано с любовью командой S&S GAMES",
-            "TG" to "Бо муҳаббат аз ҷониби S&S GAMES"
+            "EN" to "Made with passion by Subhon & Sayod Games",
+            "RU" to "Сделано с любовью: Субхон и Саёд",
+            "TG" to "Бо муҳаббат аз ҷониби Субҳон ва Саёд"
         ),
 
         // Navigation & Actions
@@ -58,7 +59,7 @@ object GameStrings {
         // Game HUD
         "hud_score" to mapOf("EN" to "SCORE", "RU" to "СЧЕТ", "TG" to "ХОЛ"),
         "hud_best" to mapOf("EN" to "BEST", "RU" to "РЕКОРД", "TG" to "РЕКОРД"),
-        "hud_streak" to mapOf("EN" to "S&S STREAK", "RU" to "S&S СЕРИЯ", "TG" to "S&S СИЛСИЛА"),
+        "hud_streak" to mapOf("EN" to "SUBHON & SAYOD STREAK", "RU" to "СЕРИЯ СУБХОН И САЁД", "TG" to "СИЛСИЛАИ СУБҲОН ВА САЁД"),
         "hud_time" to mapOf("EN" to "TIME", "RU" to "ВРЕМЯ", "TG" to "ВАҚТ"),
         "hud_moves" to mapOf("EN" to "MOVES", "RU" to "ХОДЫ", "TG" to "ҲАРАКАТҲО"),
         "hud_level" to mapOf("EN" to "LEVEL", "RU" to "УРОВЕНЬ", "TG" to "САТҲ"),
@@ -75,8 +76,8 @@ object GameStrings {
         // Modes
         "mode_classic_title" to mapOf("EN" to "Classic", "RU" to "Классика", "TG" to "Классикӣ"),
         "mode_classic_desc" to mapOf(
-            "EN" to "Endless block puzzle. Place blocks, clear lines, and build your S&S Streak.",
-            "RU" to "Бесконечный пазл. Размещайте блоки, очищайте линии и держите S&S Серию.",
+            "EN" to "Endless block puzzle. Place blocks, clear lines, and build your Subhon & Sayod Streak.",
+            "RU" to "Бесконечный пазл. Размещайте блоки, очищайте линии и держите серию Субхон и Саёд.",
             "TG" to "Муаммои беохир. Блокҳоро ҷойгир кунед, хатҳоро тоза намоед ва силсила гиред."
         ),
         "mode_time_attack_title" to mapOf("EN" to "Time Attack", "RU" to "Гонка на время", "TG" to "Ҳамлаи вақт"),
@@ -137,14 +138,14 @@ object GameStrings {
         ),
         "ach_streak_apprentice_title" to mapOf("EN" to "Streak Ignition", "RU" to "Искра серии", "TG" to "Оғози силсила"),
         "ach_streak_apprentice_desc" to mapOf(
-            "EN" to "Maintain an S&S Streak of 3 consecutive clearing turns",
-            "RU" to "Удержите серию S&S Streak из 3 ходов подряд",
+            "EN" to "Maintain a Subhon & Sayod Streak of 3 consecutive clearing turns",
+            "RU" to "Удержите серию из 3 ходов подряд",
             "TG" to "Силсилаи 3 тозакунии пайдарпайро ба даст оред"
         ),
-        "ach_streak_master_title" to mapOf("EN" to "S&S Flame Master", "RU" to "Пламя S&S", "TG" to "Шӯълаи S&S"),
+        "ach_streak_master_title" to mapOf("EN" to "Subhon & Sayod Flame Master", "RU" to "Пламя Субхон и Саёд", "TG" to "Шӯълаи Субҳон ва Саёд"),
         "ach_streak_master_desc" to mapOf(
-            "EN" to "Achieve an incredible S&S Streak of 5 or more",
-            "RU" to "Достигните серии S&S Streak из 5 или более",
+            "EN" to "Achieve an incredible streak of 5 or more",
+            "RU" to "Достигните серии из 5 или более",
             "TG" to "Силсилаи 5 ё бештарро ба даст оред"
         ),
         "ach_score_hunter_title" to mapOf("EN" to "Score Hunter", "RU" to "Охотник за очками", "TG" to "Шикорчии хол"),
@@ -184,7 +185,7 @@ object GameStrings {
         "stat_lines" to mapOf("EN" to "Lines Cleared", "RU" to "Линий очищено", "TG" to "Хатҳои тозашуда"),
         "stat_blocks" to mapOf("EN" to "Blocks Placed", "RU" to "Блоков установлено", "TG" to "Блокҳои гузошташуда"),
         "stat_combo" to mapOf("EN" to "Best Combo", "RU" to "Лучшее комбо", "TG" to "Беҳтарин комбо"),
-        "stat_streak" to mapOf("EN" to "Max S&S Streak", "RU" to "Макс. S&S Серия", "TG" to "Макс. силсила")
+        "stat_streak" to mapOf("EN" to "Max Streak", "RU" to "Макс. серия", "TG" to "Макс. силсила")
     )
 
     fun get(key: String, languageCode: String): String {

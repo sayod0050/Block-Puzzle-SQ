@@ -279,7 +279,7 @@ fun MainMenuScreen(
 
             // Creator Credits Footer
             Text(
-                text = "S&S GAMES • ${GameStrings.get("created_by", languageCode)}",
+                text = "SUBHON & SAYOD GAMES • ${GameStrings.get("created_by", languageCode)}",
                 color = theme.textSecondary.copy(alpha = 0.7f),
                 fontSize = 11.sp,
                 fontWeight = FontWeight.Medium

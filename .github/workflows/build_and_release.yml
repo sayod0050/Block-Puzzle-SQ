@@ -1,4 +1,4 @@
-name: Build and Release Block Puzzle (S&S Games)
+name: Build and Release Block Puzzle (Subhon and Sayod)
 
 on:
   push:
@@ -73,25 +73,25 @@ jobs:
           mkdir -p release-files
           # Direct installable APK (signed and ready for any Android phone)
           if [ -f "app/build/outputs/apk/debug/app-debug.apk" ]; then
-            cp app/build/outputs/apk/debug/app-debug.apk "release-files/BlockPuzzle_S&S.apk"
+            cp app/build/outputs/apk/debug/app-debug.apk "release-files/BlockPuzzle_Subhon_and_Sayod.apk"
           fi
           # Release APK
           if [ -f "app/build/outputs/apk/release/app-release.apk" ]; then
-            cp app/build/outputs/apk/release/app-release.apk "release-files/BlockPuzzle_S&S_Release.apk"
+            cp app/build/outputs/apk/release/app-release.apk "release-files/BlockPuzzle_Subhon_and_Sayod_Release.apk"
           elif [ -f "app/build/outputs/apk/release/app-release-unsigned.apk" ]; then
-            cp app/build/outputs/apk/release/app-release-unsigned.apk "release-files/BlockPuzzle_S&S_Release.apk"
+            cp app/build/outputs/apk/release/app-release-unsigned.apk "release-files/BlockPuzzle_Subhon_and_Sayod_Release.apk"
           fi
           # Bundle
           if [ -f "app/build/outputs/bundle/release/app-release.aab" ]; then
-            cp app/build/outputs/bundle/release/app-release.aab "release-files/BlockPuzzle_S&S.aab"
+            cp app/build/outputs/bundle/release/app-release.aab "release-files/BlockPuzzle_Subhon_and_Sayod.aab"
           fi
           echo "Release files ready:"
           ls -lh release-files/
 
-      - name: Upload Artifacts (Zip fallback)
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: BlockPuzzle_S&S_APK
+          name: BlockPuzzle_Subhon_and_Sayod_APK
           path: release-files/*
           if-no-files-found: error
           retention-days: 30
@@ -100,34 +100,34 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'v1.0.0' }}
-          name: "BLOCK PUZZLE — S&S GAMES ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'v1.0.0' }}"
+          name: "BLOCK PUZZLE — Subhon & Sayod Games ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'v1.0.0' }}"
           draft: false
           prerelease: false
           make_latest: true
           files: |
-            release-files/BlockPuzzle_S&S.apk
-            release-files/BlockPuzzle_S&S_Release.apk
-            release-files/BlockPuzzle_S&S.aab
+            release-files/BlockPuzzle_Subhon_and_Sayod.apk
+            release-files/BlockPuzzle_Subhon_and_Sayod_Release.apk
+            release-files/BlockPuzzle_Subhon_and_Sayod.aab
           body: |
-            ## 🎮 BLOCK PUZZLE — S&S GAMES
+            ## 🎮 BLOCK PUZZLE — SUBHON & SAYOD GAMES
             ### Edition: Premium 2026 | Android | Production Release
 
             > **"THINK SMART. PLACE BOLD."**  
-            > *Created by Sadulloev Sayod and Subhon Qodirov. Made with passion by S&S GAMES.*
+            > *Created by Subhon Qodirov and Sadulloev Sayod. Made with passion by Subhon & Sayod Games.*
 
             ---
 
             ### 📱 DIRECT APK DOWNLOAD (No Zip Required!)
             Download directly to your Android device and tap to install:
-            - 📥 **[`BlockPuzzle_S&S.apk`](https://github.com/${{ github.repository }}/releases/download/${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'v1.0.0' }}/BlockPuzzle_S&S.apk)** — Direct Android APK (Recommended, ready to install immediately)
-            - 📥 **[`BlockPuzzle_S&S_Release.apk`](https://github.com/${{ github.repository }}/releases/download/${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'v1.0.0' }}/BlockPuzzle_S&S_Release.apk)** — Production Release APK
-            - 📦 **[`BlockPuzzle_S&S.aab`](https://github.com/${{ github.repository }}/releases/download/${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'v1.0.0' }}/BlockPuzzle_S&S.aab)** — Google Play Store App Bundle
+            - 📥 **[`BlockPuzzle_Subhon_and_Sayod.apk`](https://github.com/${{ github.repository }}/releases/download/${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'v1.0.0' }}/BlockPuzzle_Subhon_and_Sayod.apk)** — Direct Android APK (Recommended, ready to install immediately)
+            - 📥 **[`BlockPuzzle_Subhon_and_Sayod_Release.apk`](https://github.com/${{ github.repository }}/releases/download/${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'v1.0.0' }}/BlockPuzzle_Subhon_and_Sayod_Release.apk)** — Production Release APK
+            - 📦 **[`BlockPuzzle_Subhon_and_Sayod.aab`](https://github.com/${{ github.repository }}/releases/download/${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'v1.0.0' }}/BlockPuzzle_Subhon_and_Sayod.aab)** — Google Play Store App Bundle
 
             ---
 
             ### ✨ Key Game Features
             - **5 Game Modes:** Classic, Time Attack (3-min countdown with time bonuses), Zen (relaxing, unlimited tools), Challenge (30 handcrafted stages with 3 stars), and Daily Puzzle (globally synchronized date seed).
-            - **Signature S&S STREAK™ Multiplier:** Consecutive clearing streaks with animated fire meter and score multipliers.
+            - **Signature Streak Multiplier:** Consecutive clearing streaks with animated fire meter and score multipliers.
             - **Power-ups:** Undo, Hint, and Shuffle.
             - **3 Visual Themes:** Midnight (Neon Dark), Aurora (Gradient), and Pure (Clean Minimal).
             - **Tri-Lingual Localization:** English, Russian (Русский), and Tajik (Тоҷикӣ).
