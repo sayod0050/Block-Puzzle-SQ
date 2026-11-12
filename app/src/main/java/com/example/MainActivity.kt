@@ -1,8 +1,7 @@
-package com.example.game
+package com.example
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -13,20 +12,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.example.game.ui.screens.AboutScreen
-import com.example.game.ui.screens.AchievementsScreen
-import com.example.game.ui.screens.ChallengeSelectScreen
-import com.example.game.ui.screens.DailyPuzzleScreen
-import com.example.game.ui.screens.GameScreen
-import com.example.game.ui.screens.MainMenuScreen
-import com.example.game.ui.screens.ModeSelectScreen
-import com.example.game.ui.screens.SettingsScreen
-import com.example.game.ui.screens.SplashScreen
-import com.example.game.ui.screens.StatsScreen
-import com.example.game.ui.screens.ThemeSelectScreen
-import com.example.game.ui.theme.GameThemePalette
-import com.example.game.viewmodel.AppScreen
-import com.example.game.viewmodel.GameViewModel
+import androidx.compose.ui.graphics.Color
+import com.example.model.GameMode
+import com.example.ui.screens.AboutScreen
+import com.example.ui.screens.AchievementsScreen
+import com.example.ui.screens.ChallengeMapScreen
+import com.example.ui.screens.DailyPuzzleScreen
+import com.example.ui.screens.GameScreen
+import com.example.ui.screens.MainMenuScreen
+import com.example.ui.screens.ModeSelectScreen
+import com.example.ui.screens.SettingsScreen
+import com.example.ui.screens.SplashScreen
+import com.example.ui.screens.StatsScreen
+import com.example.ui.screens.ThemeSelectScreen
+import com.example.ui.theme.MyApplicationTheme
+import com.example.viewmodel.AppScreen
+import com.example.viewmodel.GameViewModel
 
 class MainActivity : ComponentActivity() {
 
@@ -37,91 +38,157 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            val currentScreen by viewModel.currentScreen.collectAsState()
-            val theme by viewModel.currentTheme.collectAsState()
-            val languageCode by viewModel.languageCode.collectAsState()
-
-            // System Back button handling
-            BackHandler(enabled = currentScreen != AppScreen.MAIN_MENU) {
-                viewModel.navigateBack()
-            }
-
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = theme.boardBackground
-            ) {
-                Crossfade(targetState = currentScreen, label = "ScreenTransition") { screen ->
-                    when (screen) {
-                        AppScreen.SPLASH -> SplashScreen(
-                            theme = theme,
-                            languageCode = languageCode
-                        )
-                        AppScreen.MAIN_MENU -> MainMenuScreen(
-                            viewModel = viewModel,
-                            theme = theme,
-                            languageCode = languageCode
-                        )
-                        AppScreen.GAMEPLAY -> GameScreen(
-                            viewModel = viewModel,
-                            theme = theme,
-                            languageCode = languageCode
-                        )
-                        AppScreen.MODE_SELECT -> ModeSelectScreen(
-                            viewModel = viewModel,
-                            theme = theme,
-                            languageCode = languageCode
-                        )
-                        AppScreen.CHALLENGE_SELECT -> ChallengeSelectScreen(
-                            viewModel = viewModel,
-                            theme = theme,
-                            languageCode = languageCode
-                        )
-                        AppScreen.DAILY_PUZZLE -> DailyPuzzleScreen(
-                            viewModel = viewModel,
-                            theme = theme,
-                            languageCode = languageCode
-                        )
-                        AppScreen.STATISTICS -> StatsScreen(
-                            viewModel = viewModel,
-                            theme = theme,
-                            languageCode = languageCode
-                        )
-                        AppScreen.ACHIEVEMENTS -> AchievementsScreen(
-                            viewModel = viewModel,
-                            theme = theme,
-                            languageCode = languageCode
-                        )
-                        AppScreen.THEME_SELECT -> ThemeSelectScreen(
-                            viewModel = viewModel,
-                            theme = theme,
-                            languageCode = languageCode
-                        )
-                        AppScreen.SETTINGS -> SettingsScreen(
-                            viewModel = viewModel,
-                            theme = theme,
-                            languageCode = languageCode
-                        )
-                        AppScreen.ABOUT -> AboutScreen(
-                            viewModel = viewModel,
-                            theme = theme,
-                            languageCode = languageCode
-                        )
-                    }
-                }
+            MyApplicationTheme {
+                BlockPuzzleApp(viewModel = viewModel)
             }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        if (!viewModel.prefs.isMusicMuted) {
-            viewModel.sound.startAmbientMusic()
+        if (viewModel.uiState.value.currentScreen == AppScreen.GAME && !viewModel.uiState.value.isPaused) {
+            viewModel.soundManager.startMusic(viewModel.uiState.value.activeMode)
+        } else if (viewModel.uiState.value.currentScreen == AppScreen.MENU) {
+            viewModel.soundManager.startMusic(GameMode.CLASSIC)
         }
     }
 
     override fun onPause() {
         super.onPause()
-        viewModel.sound.stopAmbientMusic()
-        viewModel.prefs.saveActiveSession(viewModel.gameState.value)
+        viewModel.soundManager.stopMusic()
+    }
+}
+
+@Composable
+fun BlockPuzzleApp(viewModel: GameViewModel) {
+    val state by viewModel.uiState.collectAsState()
+
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = Color.Black
+    ) {
+        Crossfade(targetState = state.currentScreen, label = "screen_crossfade") { screen ->
+            when (screen) {
+                AppScreen.SPLASH -> {
+                    SplashScreen(
+                        theme = state.currentTheme,
+                        language = state.currentLanguage
+                    )
+                }
+
+                AppScreen.MENU -> {
+                    MainMenuScreen(
+                        hasSavedGame = state.hasSavedGame,
+                        completedChallengesCount = state.stats.challengesCompleted,
+                        theme = state.currentTheme,
+                        language = state.currentLanguage,
+                        onNavigate = { dest -> viewModel.navigateTo(dest) },
+                        onStartGame = { mode -> viewModel.startNewGame(mode) },
+                        onResumeGame = { viewModel.resumeSavedGame() }
+                    )
+                }
+
+                AppScreen.GAME -> {
+                    GameScreen(
+                        state = state,
+                        viewModel = viewModel
+                    )
+                }
+
+                AppScreen.MODE_SELECT -> {
+                    ModeSelectScreen(
+                        theme = state.currentTheme,
+                        language = state.currentLanguage,
+                        onBack = { viewModel.navigateTo(AppScreen.MENU) },
+                        onSelectMode = { mode -> viewModel.startNewGame(mode) },
+                        onNavigate = { dest -> viewModel.navigateTo(dest) }
+                    )
+                }
+
+                AppScreen.CHALLENGE_MAP -> {
+                    ChallengeMapScreen(
+                        maxUnlockedLevel = state.maxUnlockedChallenge,
+                        starsPerLevel = { lvl ->
+                            // Read stars from preferences
+                            val prefs = com.example.repository.GamePreferences(
+                                viewModel.getApplication()
+                            )
+                            prefs.getLevelStars(lvl)
+                        },
+                        theme = state.currentTheme,
+                        language = state.currentLanguage,
+                        onBack = { viewModel.navigateTo(AppScreen.MENU) },
+                        onPlayLevel = { lvl -> viewModel.startNewGame(GameMode.CHALLENGE, lvl) }
+                    )
+                }
+
+                AppScreen.DAILY_PREVIEW -> {
+                    val daily = state.currentDailyChallenge ?: com.example.model.DailyChallenge.forDate()
+                    val prefs = com.example.repository.GamePreferences(viewModel.getApplication())
+                    val isDone = prefs.isDailyCompleted(daily.dateSeed)
+
+                    DailyPuzzleScreen(
+                        dailyChallenge = daily,
+                        isCompleted = isDone,
+                        theme = state.currentTheme,
+                        language = state.currentLanguage,
+                        onBack = { viewModel.navigateTo(AppScreen.MENU) },
+                        onPlay = { viewModel.startNewGame(GameMode.DAILY) }
+                    )
+                }
+
+                AppScreen.STATS -> {
+                    StatsScreen(
+                        stats = state.stats,
+                        theme = state.currentTheme,
+                        language = state.currentLanguage,
+                        onBack = { viewModel.navigateTo(AppScreen.MENU) }
+                    )
+                }
+
+                AppScreen.ACHIEVEMENTS -> {
+                    AchievementsScreen(
+                        achievements = state.achievements,
+                        theme = state.currentTheme,
+                        language = state.currentLanguage,
+                        onBack = { viewModel.navigateTo(AppScreen.MENU) }
+                    )
+                }
+
+                AppScreen.THEMES -> {
+                    ThemeSelectScreen(
+                        currentTheme = state.currentTheme,
+                        language = state.currentLanguage,
+                        onSelectTheme = { th -> viewModel.setTheme(th) },
+                        onBack = { viewModel.navigateTo(AppScreen.MENU) }
+                    )
+                }
+
+                AppScreen.SETTINGS -> {
+                    SettingsScreen(
+                        currentLanguage = state.currentLanguage,
+                        sfxVolume = state.sfxVolume,
+                        musicVolume = state.musicVolume,
+                        hapticsEnabled = state.hapticsEnabled,
+                        reduceMotion = state.reduceMotion,
+                        theme = state.currentTheme,
+                        onSetLanguage = { lang -> viewModel.setLanguage(lang) },
+                        onSetSfxVolume = { vol -> viewModel.setSfxVolume(vol) },
+                        onSetMusicVolume = { vol -> viewModel.setMusicVolume(vol) },
+                        onSetHapticsEnabled = { en -> viewModel.setHapticsEnabled(en) },
+                        onSetReduceMotion = { en -> viewModel.setReduceMotion(en) },
+                        onBack = { viewModel.navigateTo(AppScreen.MENU) }
+                    )
+                }
+
+                AppScreen.ABOUT -> {
+                    AboutScreen(
+                        theme = state.currentTheme,
+                        language = state.currentLanguage,
+                        onBack = { viewModel.navigateTo(AppScreen.MENU) }
+                    )
+                }
+            }
+        }
     }
 }

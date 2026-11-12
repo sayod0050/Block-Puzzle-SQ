@@ -1,8 +1,6 @@
 {
   "name": "Block Puzzle",
-  "description": "Block Puzzle by Subhon & Sayod Games. Created by Subhon Qodirov and Sadulloev Sayod. Think smart. Place bold.",
+  "description": "Block Puzzle by S&S Games (Subhon & Sayod). Premium mobile puzzle game featuring S&S Streak, 5 game modes, and full offline play.",
   "requestFramePermissions": [],
-  "majorCapabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
